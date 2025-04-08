@@ -16,7 +16,7 @@
 2. No projeto consumidor:
 
 ```bash
-dotnet add reference ../SimpleMediator/SimpleMediator.csproj
+dotnet add reference ../SimpleMediator/SimpleMediator.Core.csproj
 ```
 
 ---
@@ -88,14 +88,6 @@ public class LoggingBehavior : IPipelineBehavior<PingRequest, string>
     }
 }
 ```
-
-Behaviors são executados em ordem de registro (como middlewares) e são ideais para:
-
-- Logging
-- Validação
-- Retry
-- Autorização
-- Transações
 
 ---
 
