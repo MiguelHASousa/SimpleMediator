@@ -3,5 +3,5 @@
 public interface IHandlerResolver
 {
     object? Resolve(Type handlerType);
-    IEnumerable<object> ResolveAll(Type handlerType);
+    IEnumerable<object?> ResolveAll(Type handlerType);
 }

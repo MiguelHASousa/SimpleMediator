@@ -1,5 +1,4 @@
 ﻿using SimpleMediator.Core.Abstractions.Request;
-
 namespace SimpleMediator.Core.Abstractions.Executors;
 
 public interface IRequestExecutor

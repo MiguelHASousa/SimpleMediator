@@ -1,5 +1,4 @@
 ﻿using SimpleMediator.Core.Abstractions.Notification;
-
 namespace SimpleMediator.Core.Abstractions.Executors;
 
 public interface INotificationExecutor
