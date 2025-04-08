@@ -8,7 +8,7 @@ public class NotificationExecutor : INotificationExecutor
     public async Task Execute<TNotification>(
         TNotification notification,
         IEnumerable<INotificationHandler<TNotification>> handlers,
-        CancellationToken cancellationToken
+        CancellationToken cancellationToken = default
     ) where TNotification : INotification
     {
         foreach (var handler in handlers)
