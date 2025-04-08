@@ -1,16 +1,17 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using SimpleMediator.Core.Implementation.Delegate;
-using SimpleMediator.Core.Interfaces.Executors;
-using SimpleMediator.Core.Interfaces.PipelineBehavior;
-using SimpleMediator.Core.Interfaces.Request;
+using SimpleMediator.Core.Abstractions.Executors;
+using SimpleMediator.Core.Abstractions.PipelineBehavior;
+using SimpleMediator.Core.Abstractions.Request;
+using SimpleMediator.Core.Infrastructure.Delegate;
 
-namespace SimpleMediator.Core.Implementation.Executor;
+namespace SimpleMediator.Core.Infrastructure.Executor;
 
 public class BehaviorRequestExecutor(IServiceProvider provider) : IRequestExecutor
 {
     public async Task<TResponse> Execute<TRequest, TResponse>(
         TRequest request,
-        IRequestHandler<TRequest, TResponse> handler
+        IRequestHandler<TRequest, TResponse> handler,
+        CancellationToken cancellationToken = default
     )
     where TRequest : IRequest<TResponse>
     {
@@ -19,12 +20,12 @@ public class BehaviorRequestExecutor(IServiceProvider provider) : IRequestExecut
             .Reverse()
             .ToList();
 
-        RequestHandlerDelegate<TResponse> next = () => handler.Handle(request);
+        RequestHandlerDelegate<TResponse> next = () => handler.Handle(request, cancellationToken);
 
         foreach (var behavior in behaviors)
         {
             var current = next;
-            next = () => behavior.Handle(request, current);
+            next = () => behavior.Handle(request, cancellationToken, current);
         }
 
         return await next();

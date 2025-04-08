@@ -1,4 +1,4 @@
-﻿namespace SimpleMediator.Core.Interfaces.HandlerResolver;
+﻿namespace SimpleMediator.Core.Abstractions.HandlerResolver;
 
 public interface IHandlerResolver
 {

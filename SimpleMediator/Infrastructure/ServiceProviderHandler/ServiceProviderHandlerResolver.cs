@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using SimpleMediator.Core.Interfaces.HandlerResolver;
+using SimpleMediator.Core.Abstractions.HandlerResolver;
 
-namespace SimpleMediator.Core.Implementation.ServiceProviderHandler;
+namespace SimpleMediator.Core.Infrastructure.ServiceProviderHandler;
 
 public class ServiceProviderHandlerResolver(IServiceProvider provider) : IHandlerResolver
 {
