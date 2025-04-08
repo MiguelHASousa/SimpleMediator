@@ -1,5 +1,4 @@
-﻿using SimpleMediator.Core.Implementation.Executors;
-using SimpleMediator.Core.Interfaces.Executors;
+﻿using SimpleMediator.Core.Interfaces.Executors;
 using SimpleMediator.Core.Interfaces.HandlerResolver;
 using SimpleMediator.Core.Interfaces.Mediator;
 using SimpleMediator.Core.Interfaces.Notification;
