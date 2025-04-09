@@ -21,18 +21,17 @@ dotnet add reference ../SimpleMediator/SimpleMediator.Core.csproj
 
 ---
 
-## 🛠️ Configuração
+## 🛠️ Configuração Essencial
 
 No `Program.cs` ou `Startup.cs`:
 
 ```csharp
-builder.Services.AddScoped<IMediator, SimpleMediator>();
-builder.Services.AddScoped<IRequestExecutor, BehaviorRequestExecutor>();
-builder.Services.AddScoped<INotificationExecutor, NotificationExecutor>();
+// Registre dependencias (permite customizações)
+builder.Services.AddSimpleMediator();
+
 
 // Registre seus handlers
 builder.Services.AddScoped<IRequestHandler<PingRequest, string>, PingHandler>();
-builder.Services.AddScoped<INotificationHandler<DomainEvent>, DomainEventHandler>();
 
 // (Opcional) Behaviors
 builder.Services.AddScoped<IPipelineBehavior<PingRequest, string>, LoggingBehavior>();
