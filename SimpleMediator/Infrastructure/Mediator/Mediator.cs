@@ -16,9 +16,8 @@ public class Mediator(
         var handlerType = typeof(IRequestHandler<,>).MakeGenericType(request.GetType(), typeof(TResponse));
         var handler = resolver.Resolve(handlerType) 
             ?? throw new InvalidOperationException($"Handler not found for {request.GetType().Name}");
-        var typedHandler = (IRequestHandler<IRequest<TResponse>, TResponse>)handler;
 
-        return await executor.Execute((dynamic)request, (dynamic)typedHandler, cancellationToken);
+        return await executor.Execute((dynamic)request, (dynamic)handler, cancellationToken);
     }
 
     public async Task Publish<TNotification>(TNotification notification, CancellationToken cancellationToken = default) where TNotification : INotification
@@ -26,7 +25,6 @@ public class Mediator(
         var handlerType = typeof(INotificationHandler<>).MakeGenericType(typeof(TNotification));
         var handlersObj = resolver.ResolveAll(handlerType);
 
-        var typedHandlers = handlersObj.Cast<INotificationHandler<TNotification>>();
-        await notificationExecutor.Execute(notification, typedHandlers, cancellationToken);
+        await notificationExecutor.Execute(notification, (dynamic)handlersObj, cancellationToken);
     }
 }
